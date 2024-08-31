@@ -33,7 +33,7 @@ final class SandboxServiceTests: XCTestCase {
             case .success(let sandbox):
                 XCTAssertEqual(sandbox.spotlight.count, 2)
                 XCTAssertEqual(sandbox.products.count, 3)
-            case .failure(_):
+            case .failure:
                 XCTFail("Was not expect error.")
             }
 
@@ -48,7 +48,7 @@ final class SandboxServiceTests: XCTestCase {
 
         sut.fetchSandbox { result in
             switch result {
-            case .success(_):
+            case .success:
                 XCTFail("Was not expect data.")
             case .failure(let error):
                 XCTAssertEqual(error, .noData)
@@ -61,14 +61,13 @@ final class SandboxServiceTests: XCTestCase {
     }
 
     func testFailure_WithError_ShouldReturnError() {
-        let message = "Sandbox error"
         sessionMock.error = SandboxError.hasError
 
         let expectation = XCTestExpectation(description: "Fetch sandbox")
 
         sut.fetchSandbox { result in
             switch result {
-            case .success(_):
+            case .success:
                 XCTFail("Was not expect data.")
             case .failure(let error):
                 XCTAssertEqual(error, .hasError)
@@ -80,6 +79,7 @@ final class SandboxServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
+    // swiftlint:disable non_optional_string_data_conversion
     func testFailure_WithDecodeError_ShouldReturnDecodeError() {
         let jsonWrongData = """
         { }
@@ -91,7 +91,7 @@ final class SandboxServiceTests: XCTestCase {
 
         sut.fetchSandbox { result in
             switch result {
-            case .success(_):
+            case .success:
                 XCTFail("Was not expect data.")
             case .failure(let error):
                 XCTAssertEqual(error, .decodeError)

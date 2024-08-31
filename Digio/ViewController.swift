@@ -13,7 +13,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
-        let service = SandboxService()
+        let service =  SandboxService()
 
         service.fetchSandbox { result in
             switch result {
@@ -24,7 +24,4 @@ class ViewController: UIViewController {
             }
         }
     }
-
-
 }
-

@@ -38,8 +38,8 @@ final class SandboxService: SandboxServicing {
             return
         }
 
-        let task = session.dataTask(with: url) { data, response, error in
-            if let _ = error {
+        let task = session.dataTask(with: url) { data, _, error in
+            if error != nil {
                 completionHandler(.failure(.hasError))
                 return
             }

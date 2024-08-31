@@ -1,0 +1,27 @@
+disabled_rules:
+  - blanket_disable_command
+  - identifier_name
+
+opt_in_rules:
+  - force_unwrapping
+  - empty_count
+  - cyclomatic_complexity
+  - colon
+  - comma
+  - empty_parameters
+  - closure_parameter_position
+  - duplicate_conditions
+  - line_length
+  - file_length
+  - function_body_length
+  - opening_brace
+  - redundant_set_access_control
+  - trailing_comma
+  - trailing_semicolon
+  - vertical_whitespace
+  - vertical_parameter_alignment
+
+excluded:
+  - DigioTests/Service/JSONMock.swift
+
+line_length: 120

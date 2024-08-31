@@ -10,9 +10,9 @@ import Foundation
 @testable import Digio
 
 final class URLSessionMock: URLSessionProtocol {
-    var data: Data? = nil
-    var response: URLResponse? = nil
-    var error: Error? = nil
+    var data: Data?
+    var response: URLResponse?
+    var error: Error?
 
     func dataTask(with request: URL,
                   completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
