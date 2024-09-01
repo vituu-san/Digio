@@ -7,19 +7,22 @@
 
 import UIKit
 
-fileprivate let imageCache = NSCache<NSString, UIImage>()
+private let imageCache = NSCache<NSString, UIImage>()
 
 extension UIImageView {
-    func loadCachedImage(with urlString: String, placeholder: UIImage?) {
+    func loadCachedImage(with urlString: String, session: URLSessionProtocol = URLSession.shared) {
+        self.contentMode = .scaleToFill
+        self.tintColor = .lightGray
+
         self.image = nil
 
         if let cachedImage = imageCache.object(forKey: NSString(string: urlString)) {
             self.image = cachedImage
             return
         }
-        
-        let imageDownloader = ImageDownloader()
-        
+
+        let imageDownloader = ImageDownloader(session: session)
+
         imageDownloader.download(from: urlString) { result in
             DispatchQueue.main.async { [weak self] in
                 switch result {
@@ -27,6 +30,7 @@ extension UIImageView {
                     imageCache.setObject(image, forKey: NSString(string: urlString))
                     self?.image = image
                 case .failure(let error):
+                    self?.contentMode = .scaleAspectFit
                     switch error {
                     case .invalidImage:
                         self?.image = UIImage(named: "broken-image")
@@ -35,7 +39,6 @@ extension UIImageView {
                     case .noData:
                         self?.image = UIImage(named: "broken-data")
                     }
-                    self?.image = placeholder
                 }
             }
         }
