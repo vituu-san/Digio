@@ -1,6 +1,7 @@
 disabled_rules:
   - blanket_disable_command
   - identifier_name
+  - trailing_whitespace
 
 opt_in_rules:
   - force_unwrapping
@@ -18,7 +19,6 @@ opt_in_rules:
   - redundant_set_access_control
   - trailing_comma
   - trailing_semicolon
-  - vertical_whitespace
   - vertical_parameter_alignment
 
 excluded:
