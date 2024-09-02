@@ -17,4 +17,8 @@ struct Spotlight: Decodable {
         case banner = "bannerURL"
         case desc = "description"
     }
+    
+    func carouselItem() -> Carousel.Item {
+        .init(id: name, urlString: banner, desc: desc)
+    }
 }

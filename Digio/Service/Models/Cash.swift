@@ -17,4 +17,8 @@ struct Cash: Decodable {
         case banner = "bannerURL"
         case desc = "description"
     }
+    
+    func carouselItem() -> Carousel.Item {
+        .init(id: title, urlString: banner, desc: desc)
+    }
 }

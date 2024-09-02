@@ -7,12 +7,12 @@
 
 import UIKit
 
-final class SpotlightCarouselCell: UICollectionViewCell {
+final class CarouselCell: UICollectionViewCell {
     private var backView = UIView()
     
     private var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -28,8 +28,8 @@ final class SpotlightCarouselCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateImage(with bannerUrl: String) {
-        imageView.loadCachedImage(with: bannerUrl)
+    func updateImage(with bannerUrl: String, session: URLSessionProtocol) {
+        imageView.loadCachedImage(with: bannerUrl, session: session)
     }
     
     func buildViewHierarchy() {
@@ -49,6 +49,7 @@ final class SpotlightCarouselCell: UICollectionViewCell {
     }
     
     func setupLayout() {
+        imageView.backgroundColor = .white
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 12
         

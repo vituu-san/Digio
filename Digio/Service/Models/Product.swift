@@ -17,4 +17,8 @@ struct Product: Decodable {
         case image = "imageURL"
         case desc = "description"
     }
+    
+    func carouselItem() -> Carousel.Item {
+        .init(id: name, urlString: image, desc: desc)
+    }
 }
